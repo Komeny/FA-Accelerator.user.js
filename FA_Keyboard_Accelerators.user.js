@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     3
+// @version     4
 // @grant       GM_xmlhttpRequest
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
 // ==/UserScript==
@@ -104,6 +104,7 @@ var Slideshow = (function() {
 			#fa_accelerate_lightbox {\
 				display: block; position:fixed; top:0; left:0; width:100%; height:100%;\
 				z-index:1000; overflow:hidden;\
+				box-sizing: border-box;\
 				background-color: rgba(0,0,0,.8);\
 				padding: 4em 1em 1em;\
 				\
