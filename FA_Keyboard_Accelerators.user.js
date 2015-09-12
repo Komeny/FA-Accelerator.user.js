@@ -157,10 +157,20 @@ var Slideshow = (function() {
 			return window.location.href = "/view/"+pages[pos]+"/";
 		}
 		instance.show_next = function() {
-			return instance.go(++pos);
+			if(pages.length > pos) {
+				return instance.go(++pos);
+			}
+			else {
+				return false;
+			}
 		}
 		instance.show_previous = function() {
-			return instance.go(--pos);
+			if(pos > 0){
+				return instance.go(--pos);
+			}
+			else {
+				return false;
+			}
 		}
 
 		// do not remove this:
