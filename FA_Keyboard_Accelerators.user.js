@@ -8,6 +8,7 @@
 // @version     4
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
+// @grant       GM_openInTab
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
 // ==/UserScript==
 
@@ -156,7 +157,8 @@ var Slideshow = (function() {
 			return lightbox.hide(.5);
 		}
 		instance.open = function() {
-			return window.location.href = "/view/"+pages[pos]+"/";
+			//return window.location.href = "/view/"+pages[pos]+"/";
+			return GM_openInTab("/view/"+pages[pos]+"/", true);
 		}
 		instance.show_next = function() {
 			if(pages.length > pos) {
@@ -232,17 +234,19 @@ var keymappings = {
 	},
 	"lightbox": {
 		27: function() { // [ESC]
-			console.log("lightbox ESC");
+			Slideshow().hide();
+			keymap = "basic";
+			return false;
+		},
+		83: function() { // S
 			Slideshow().hide();
 			keymap = "basic";
 			return false;
 		},
 		37: function() { // [<-]
-			console.log("lightbox prev");
 			Slideshow().show_previous(); return false;
 		},
 		39: function() { // [->]
-			console.log("lightbox next");
 			if(Slideshow().show_next() == false) {
 				Slideshow().hide();
 				keymap = "basic";
