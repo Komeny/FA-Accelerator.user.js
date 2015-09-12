@@ -44,7 +44,7 @@ Cache = (function() {
 	};
 })();
 
-Prefetcher = (function() {
+Prefetcher = (function() { // TODO: Rewrite this.
 	var instance;
 	// define private "members" here
 	// define them as simple closure variables
