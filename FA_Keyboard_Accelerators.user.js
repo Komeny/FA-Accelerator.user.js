@@ -6,6 +6,7 @@
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
 // @version     4
+// @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
 // ==/UserScript==
