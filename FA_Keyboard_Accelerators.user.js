@@ -36,7 +36,6 @@ Cache = (function() {
 			});
 		}
 		instance.save = function(id, dom) {
-			console.log("adding to cache: "+id+" : ")
 			imglinkcache[id] = dom.children().attr("src");
 		}
 
@@ -73,7 +72,6 @@ Prefetcher = (function() {
 			prefetchlist.push({"path": path, "callback": callback})
 
 			if(!handle){
-				console.log("Starting prefetcher")
 				handle = window.setTimeout(prefetch, interval)
 			}
 		}
@@ -214,7 +212,6 @@ var keymappings = {
 			return !foundsomething
 		},
 		27: function() { // [ESC]
-			console.log("basic ESC");
 			Slideshow().hide();
 			keymap = "basic";
 			return false;
