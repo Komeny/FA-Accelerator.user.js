@@ -189,11 +189,11 @@ var keymap = "basic"
 var keymappings = {
 	"basic" : {
 		37: function() { // [<-]
-			var e = $("button[value=Back], a.button.prev")
+			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev")
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		39: function() { // [->]
-			var e = $("button[value=Next], a.button.next")
+			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next")
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		70: function() { // F
