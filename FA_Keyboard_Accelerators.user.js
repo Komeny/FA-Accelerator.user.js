@@ -102,17 +102,15 @@ var Slideshow = (function() {
 		lightboximg.appendTo(lightbox)
 		$("body").append("<style>\
 			#fa_accelerate_lightbox {\
-				display: block; position:fixed; top:0; left:0; width:100%; height:100%;\
-				z-index:1000; overflow:hidden;\
+				display: block; position:fixed; top:0; width:100%; height:100%;\
+				z-index:4000; overflow:hidden;\
 				box-sizing: border-box;\
 				background-color: rgba(0,0,0,.8);\
-				padding: 4em 1em 1em;\
-				\
+				padding: 1em;\
 			}\
 			#fa_accelerate_lightbox img {\
-				display:block; margin:0 auto; min-width:2em; min-height:2em;\
+				display:block; margin:0 auto;\
 				max-width:100%; max-height:100%; height:auto; width:auto;\
-				\
 			}\
 		</style>")
 
