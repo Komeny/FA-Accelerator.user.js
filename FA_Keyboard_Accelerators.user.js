@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     4
+// @version     5
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_openInTab
@@ -98,11 +98,47 @@ var Slideshow = (function() {
 		// initialisations
 		lightboximg = $("<img></img>")
 		lightbox = $("<lightbox id='fa_accelerate_lightbox'>\
-			<a href='#' class='lightbox_next lightbox_btn'></a>\
 			<a href='#' class='lightbox_prev lightbox_btn'></a>\
+			<a href='#' class='lightbox_next lightbox_btn'></a>\
 		</lightbox>")
 		lightbox.appendTo($("body"))
 		lightboximg.appendTo(lightbox)
+		$("body").append("<style>\
+		#fa_accelerate_lightbox {\
+			display: block;\
+			position:fixed;\
+			top:0;\
+			width:100%;\
+			height:100%;\
+			z-index:4000;\
+			overflow:hidden;\
+			box-sizing: border-box;\
+			background-color: rgba(0,0,0,.8);\
+			padding: 1em;\
+		}\
+		#fa_accelerate_lightbox .lightbox_btn {\
+			position: absolute;\
+			top: 50%;\
+			width: 50%;\
+			height: 100px;\
+			margin-top: -50px;\
+			outline: 0;\
+		}\
+		#fa_accelerate_lightbox .lightbox_prev {\
+			left: 0;\
+		}\
+		#fa_accelerate_lightbox .lightbox_next {\
+			right: 0;\
+		}\
+		#fa_accelerate_lightbox img {\
+			display:block;\
+			margin:0 auto;\
+			max-width:100%;\
+			max-height:100%;\
+			height:auto;\
+			width:auto;\
+		}\
+		</style>")
 		$("body").append("<style>\
 			#fa_accelerate_lightbox {\
 				display: block; position:fixed; top:0; width:100%; height:100%;\
