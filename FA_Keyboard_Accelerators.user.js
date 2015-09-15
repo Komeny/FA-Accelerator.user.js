@@ -97,7 +97,10 @@ var Slideshow = (function() {
 
 		// initialisations
 		lightboximg = $("<img></img>")
-		lightbox = $("<lightbox id='fa_accelerate_lightbox'></lightbox>")
+		lightbox = $("<lightbox id='fa_accelerate_lightbox'>\
+			<a href='#' class='lightbox_next lightbox_btn'></a>\
+			<a href='#' class='lightbox_prev lightbox_btn'></a>\
+		</lightbox>")
 		lightbox.appendTo($("body"))
 		lightboximg.appendTo(lightbox)
 		$("body").append("<style>\
