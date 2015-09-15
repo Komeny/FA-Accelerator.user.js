@@ -176,6 +176,10 @@ var Slideshow = (function() {
 			}
 		}
 
+		// click handlers
+		$("#fa_accelerate_lightbox .lightbox_next").click(instance.show_next)
+		$("#fa_accelerate_lightbox .lightbox_prev").click(instance.show_previous)
+
 		// do not remove this:
 		return instance;
 	};
