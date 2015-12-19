@@ -142,7 +142,7 @@ var Slideshow = (function() {
 		$("body").append("<style>\
 			#fa_accelerate_lightbox {\
 				display: block; position:fixed; top:0; width:100%; height:100%;\
-				z-index:4000; overflow:hidden;\
+				z-index:999999991; overflow:hidden;\
 				box-sizing: border-box;\
 				background-color: rgba(0,0,0,.8);\
 				padding: 1em;\
@@ -245,7 +245,7 @@ var keymappings = {
 		71: function() { // G
 			var foundsomething = false;
 			$("html a").each(function(i, self){
-				if(self.text == "Go to Gallery" || self.text == "Gallery") {
+				if(self.pathname.match("^/gallery")) {
 					self.click()
 					foundsomething = true
 				}
@@ -308,9 +308,10 @@ var keymappings = {
 	}
 }
 
-$('html').on("keydown", function(event) {
-	if (keymappings[keymap][event.which]) {
-		return keymappings[keymap][event.which](event, event.which, event)
+$('html').on("keydown", function(e) {
+	if (keymappings[keymap][e.which] && !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
+		console.log(e)
+		return keymappings[keymap][e.which](e, e.which, e)
 	}
 });
 
