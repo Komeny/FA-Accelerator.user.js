@@ -12,6 +12,8 @@
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
 // ==/UserScript==
 
+var keymap = "basic"
+
 Cache = (function() {
 	var instance;
 	// define private "members" here
@@ -213,7 +215,13 @@ var Slideshow = (function() {
 		}
 
 		// click handlers
-		$("#fa_accelerate_lightbox .lightbox_next").click(instance.show_next)
+		$("#fa_accelerate_lightbox .lightbox_next").click(function() {
+			if(instance.show_next() == false) {
+				instance.hide();
+				keymap = "basic";
+			}
+			return false;
+		})
 		$("#fa_accelerate_lightbox .lightbox_prev").click(instance.show_previous)
 
 		// do not remove this:
@@ -221,7 +229,6 @@ var Slideshow = (function() {
 	};
 })();
 
-var keymap = "basic"
 var keymappings = {
 	"basic" : {
 		37: function() { // [<-]
