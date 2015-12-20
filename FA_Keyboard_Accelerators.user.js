@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     7
+// @version     8
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_openInTab
@@ -232,11 +232,13 @@ var Slideshow = (function() {
 var keymappings = {
 	"basic" : {
 		37: function() { // [<-]
-			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev")
+			//                                                                            detail view
+			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev")
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		39: function() { // [->]
-			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next")
+			//                                                                            detail view
+			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next, .button a.next")
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		70: function() { // F
