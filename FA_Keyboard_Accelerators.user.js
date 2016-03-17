@@ -28,7 +28,7 @@ Cache = (function() {
 		// public members
 		instance.requestImage = function(id, callback) {
 			if(imglinkcache[id]) {
-				console.log("Serving "+id+" from cache")
+				//console.log("Serving "+id+" from cache")
 				return callback(imglinkcache[id]);
 			}
 			// Get submission page
@@ -318,8 +318,11 @@ var keymappings = {
 }
 
 $('html').on("keydown", function(e) {
+	if ($(e.target).is("input"))
+		return true
+
 	if (keymappings[keymap][e.which] && !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
-		console.log(e)
+		//console.log(e)
 		return keymappings[keymap][e.which](e, e.which, e)
 	}
 });
