@@ -194,8 +194,9 @@ var Slideshow = (function() {
 			return lightbox.hide(.5);
 		}
 		instance.open = function() {
-			//return window.location.href = "/view/"+pages[pos]+"/";
-			return GM_openInTab("/view/"+pages[pos]+"/", true);
+			var l = window.location
+			var url = l.protocol+"//"+l.hostname+"/view/"+pages[pos]+"/"
+			return GM_openInTab(url, true);
 		}
 		instance.show_next = function() {
 			if(pages.length > pos) {
