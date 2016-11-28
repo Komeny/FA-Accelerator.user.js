@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     9
+// @version     10
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_openInTab
@@ -13,6 +13,38 @@
 // ==/UserScript==
 
 var keymap = "basic"
+
+Context = (function() {
+	var instance;
+	var context = false;
+	var username = false;
+
+	// Detect context
+	// Types: user-profile, user-gallery, submission, browse, search
+	var pathcrumb = window.location.pathname.match(/^\/([^\/]+)/)
+	var crumbs = {
+		search:	 "search",
+		browse:	 "browse",
+		view:	 "submission",
+		gallery: "user-gallery",
+		user:	 "user-profile",
+	}
+	console.log(pathcrumb)
+	if (crumbs[pathcrumb]) {
+		context = crumbs[pathcrumb];
+	}
+
+	// Detect user name
+	if ($(".submission-title > span > a > strong").length > 0) {
+		username = $(".submission-title > span > a > strong").text()
+		console.log(username)
+	};
+
+	return function(argument) {
+		if (instance) { return instance; }
+		instance = this;
+	}
+})()
 
 Cache = (function() {
 	var instance;
@@ -156,9 +188,9 @@ var Slideshow = (function() {
 		</style>")
 
 		var images = {}
-		var pages = $(".browse,.gallery,.messagecenter").find("b.t-image")
+		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image")
 			.map(function(i,e) {
-				var id = e.id.replace(/sid_(.*)/, "$1");
+				var id = e.id.replace(/sid-(.*)/, "$1");
 				Prefetcher().request("/view/"+id+"/ #submissionImg",
 					function(dom){Cache().save(id, dom) });
 				return id;
@@ -244,8 +276,8 @@ var keymappings = {
 		},
 		70: function() { // F
 			var foundsomething = false;
-			$("html a").each(function(i, self){
-				if(self.text == "+Add to Favorites") {
+			$(".button.fav").each(function(i, self){
+				if(self.text == "+ Fav") {
 					self.click()
 					foundsomething = true
 				}
