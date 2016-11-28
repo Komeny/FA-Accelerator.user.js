@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     10
+// @version     11
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_openInTab
@@ -144,7 +144,7 @@ var Slideshow = (function() {
 			top:0;\
 			width:100%;\
 			height:100%;\
-			z-index:4000;\
+			z-index:999999991;\
 			overflow:hidden;\
 			box-sizing: border-box;\
 			background-color: rgba(0,0,0,.8);\
@@ -172,19 +172,6 @@ var Slideshow = (function() {
 			height:auto;\
 			width:auto;\
 		}\
-		</style>")
-		$("body").append("<style>\
-			#fa_accelerate_lightbox {\
-				display: block; position:fixed; top:0; width:100%; height:100%;\
-				z-index:999999991; overflow:hidden;\
-				box-sizing: border-box;\
-				background-color: rgba(0,0,0,.8);\
-				padding: 1em;\
-			}\
-			#fa_accelerate_lightbox img {\
-				display:block; margin:0 auto;\
-				max-width:100%; max-height:100%; height:auto; width:auto;\
-			}\
 		</style>")
 
 		var images = {}
@@ -360,3 +347,22 @@ $('html').on("keydown", function(e) {
 	}
 });
 
+$(function() {
+	$("body").append("<style>\
+	body {\
+		margin-top: 50px;\
+	}\
+	#header {\
+		min-height: inherit;\
+		width: 100%;\
+		position: fixed;\
+		top: 0;\
+		background-color: #151517;\
+		z-index: 9000;\
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);\
+	}\
+	.section-divider {\
+		box-shadow: none !important;\
+	}\
+	</style>");
+})
