@@ -252,13 +252,13 @@ var Slideshow = (function() {
 var keymappings = {
 	"basic" : {
 		37: function() { // [<-]
-			//                                                                            detail view
-			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev")
+			//                                                                            detail view     gallery
+			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev, button.button:contains('Prev')")
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		39: function() { // [->]
-			//                                                                            detail view
-			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next, .button a.next")
+			//                                                                            detail view     gallery
+			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next, .button a.next, button.button:contains('Next') ")
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		70: function() { // F
