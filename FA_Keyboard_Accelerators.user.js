@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     13
+// @version     14
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_openInTab
@@ -15,21 +15,6 @@
 var keymap = "basic"
 
 var css_body = `
-body {
-	margin-top: 50px;
-}
-#header {
-	min-height: inherit;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	background-color: #151517;
-	z-index: 9000;
-	box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-.section-divider {
-	box-shadow: none !important;
-}
 `
 
 var css_lightbox = `
