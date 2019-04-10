@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     14
+// @version     15
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_openInTab
@@ -19,59 +19,80 @@ var css_body = `
 
 var css_lightbox = `
 #fa_accelerate_lightbox {
-	display: flex;
-	align-items: center;
-	position:fixed;
-	top:0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 999999991;
-	overflow: hidden;
-	box-sizing: border-box;
-	background-color: rgba(0,0,0,.8);
-	padding: 1em;
+    display: flex;
+    align-items: center;
+    position:fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999999991;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,.8);
+    padding: 1em;
+}
+#fa_accelerate_lightbox .lightbox_close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 40px;
+    padding: 50px;
+    line-height: 1;
+    z-index: 1;
+    outline: 0;
+}
+#fa_accelerate_lightbox .lightbox_close::before {
+    content:"✖";
+    display: block;
+    color: #fff;
 }
 #fa_accelerate_lightbox .lightbox_btn {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 30%;
-	outline: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30%;
+    outline: 0;
 }
+#fa_accelerate_lightbox .lightbox_close::before,
 #fa_accelerate_lightbox .lightbox_btn::before {
-	display: block;
-	position: absolute;
-	top: 50%;
-	font-size: 100px;
-	color: #fff;
-	opacity: 0.5;
-	text-shadow: 0 0 6px rgba(0,0,0,0.2);
-	transform: translateY(-50%);
-	transition: opacity 0.3s ease-in-out;
+    display: block;
+    opacity: 0.5;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease-in-out;
 }
+
+#fa_accelerate_lightbox .lightbox_btn::before {
+    position: absolute;
+    top: 50%;
+    font-size: 100px;
+    transform: translateY(-50%);
+}
+#fa_accelerate_lightbox .lightbox_close:hover::before,
+#fa_accelerate_lightbox .lightbox_close:focus::before,
 #fa_accelerate_lightbox .lightbox_btn:hover::before,
 #fa_accelerate_lightbox .lightbox_btn:focus::before {
-	opacity: 1;
+    opacity: 1;
 }
 #fa_accelerate_lightbox .lightbox_prev {
-	left: 0;
+    left: 0;
 }
 #fa_accelerate_lightbox .lightbox_next {
-	right: 0;
+    right: 0;
 }
 #fa_accelerate_lightbox .lightbox_prev::before {
-	content:'‹';
-	left: 50px;
+    content:'‹';
+    left: 50px;
 }
 #fa_accelerate_lightbox .lightbox_next::before {
-	content:'›';
-	right: 50px;
+    content:'›';
+    right: 50px;
 }
 #fa_accelerate_lightbox img {
-	margin:0 auto;
-	max-width:100%;
-	max-height:100%;
+    margin:0 auto;
+    max-width:100%;
+    max-height:100%;
 }
 `
 
@@ -195,6 +216,7 @@ var Slideshow = (function() {
 		lightbox = $("<lightbox id='fa_accelerate_lightbox'>\
 			<a href='#' class='lightbox_prev lightbox_btn'></a>\
 			<a href='#' class='lightbox_next lightbox_btn'></a>\
+			<a href='#' class='lightbox_close'>✖</a>\
 		</lightbox>")
 		lightbox.appendTo($("body"))
 		lightboximg.appendTo(lightbox)
@@ -232,11 +254,13 @@ var Slideshow = (function() {
 			}
 		}
 		instance.show = function() {
-			lightbox.show(1);
+			lightbox.show();
 			return instance.go(pos);
 		}
 		instance.hide = function() {
-			return lightbox.hide(.5);
+			lightbox.hide();
+			keymap = "basic";
+			return false;
 		}
 		instance.open = function() {
 			var l = window.location
@@ -264,11 +288,14 @@ var Slideshow = (function() {
 		$("#fa_accelerate_lightbox .lightbox_next").click(function() {
 			if(instance.show_next() == false) {
 				instance.hide();
-				keymap = "basic";
 			}
 			return false;
 		})
 		$("#fa_accelerate_lightbox .lightbox_prev").click(instance.show_previous)
+		$("#fa_accelerate_lightbox .lightbox_close").click(function() {
+			instance.hide();
+			return false;
+		})
 
 		// do not remove this:
 		return instance;
@@ -308,9 +335,7 @@ var keymappings = {
 			return !foundsomething
 		},
 		27: function() { // [ESC]
-			Slideshow().hide();
-			keymap = "basic";
-			return false;
+			return Slideshow().hide();
 		},
 		83: function() { // S
 			keymap = "lightbox";
@@ -327,14 +352,10 @@ var keymappings = {
 	},
 	"lightbox": {
 		27: function() { // [ESC]
-			Slideshow().hide();
-			keymap = "basic";
-			return false;
+			return Slideshow().hide();
 		},
 		83: function() { // S
-			Slideshow().hide();
-			keymap = "basic";
-			return false;
+			return Slideshow().hide();
 		},
 		37: function() { // [<-]
 			Slideshow().show_previous(); return false;
@@ -342,7 +363,6 @@ var keymappings = {
 		39: function() { // [->]
 			if(Slideshow().show_next() == false) {
 				Slideshow().hide();
-				keymap = "basic";
 			}
 			return false;
 		},
