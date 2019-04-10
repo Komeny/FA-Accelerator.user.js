@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     12
+// @version     13
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM_xmlhttpRequest
 // @grant       GM_openInTab
@@ -14,7 +14,83 @@
 
 var keymap = "basic"
 
-Context = (function() {
+var css_body = `
+body {
+	margin-top: 50px;
+}
+#header {
+	min-height: inherit;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	background-color: #151517;
+	z-index: 9000;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.section-divider {
+	box-shadow: none !important;
+}
+`
+
+var css_lightbox = `
+#fa_accelerate_lightbox {
+	display: flex;
+	align-items: center;
+	position:fixed;
+	top:0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 999999991;
+	overflow: hidden;
+	box-sizing: border-box;
+	background-color: rgba(0,0,0,.8);
+	padding: 1em;
+}
+#fa_accelerate_lightbox .lightbox_btn {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 30%;
+	outline: 0;
+}
+#fa_accelerate_lightbox .lightbox_btn::before {
+	display: block;
+	position: absolute;
+	top: 50%;
+	font-size: 100px;
+	color: #fff;
+	opacity: 0.5;
+	text-shadow: 0 0 6px rgba(0,0,0,0.2);
+	transform: translateY(-50%);
+	transition: opacity 0.3s ease-in-out;
+}
+#fa_accelerate_lightbox .lightbox_btn:hover::before,
+#fa_accelerate_lightbox .lightbox_btn:focus::before {
+	opacity: 1;
+}
+#fa_accelerate_lightbox .lightbox_prev {
+	left: 0;
+}
+#fa_accelerate_lightbox .lightbox_next {
+	right: 0;
+}
+#fa_accelerate_lightbox .lightbox_prev::before {
+	content:'‹';
+	left: 50px;
+}
+#fa_accelerate_lightbox .lightbox_next::before {
+	content:'›';
+	right: 50px;
+}
+#fa_accelerate_lightbox img {
+	margin:0 auto;
+	max-width:100%;
+	max-height:100%;
+}
+`
+
+var Context = (function() {
 	var instance;
 	var context = false;
 	var username = false;
@@ -46,7 +122,7 @@ Context = (function() {
 	}
 })()
 
-Cache = (function() {
+var Cache = (function() {
 	var instance;
 	// define private "members" here
 	// define them as simple closure variables
@@ -78,7 +154,7 @@ Cache = (function() {
 	};
 })();
 
-Prefetcher = (function() { // TODO: Rewrite this.
+var Prefetcher = (function() { // TODO: Rewrite this.
 	var instance;
 	// define private "members" here
 	// define them as simple closure variables
@@ -130,49 +206,14 @@ var Slideshow = (function() {
 		var pos = 0;
 
 		// initialisations
-		lightboximg = $("<img></img>")
+		var lightboximg = $("<img></img>")
 		lightbox = $("<lightbox id='fa_accelerate_lightbox'>\
 			<a href='#' class='lightbox_prev lightbox_btn'></a>\
 			<a href='#' class='lightbox_next lightbox_btn'></a>\
 		</lightbox>")
 		lightbox.appendTo($("body"))
 		lightboximg.appendTo(lightbox)
-		$("body").append("<style>\
-		#fa_accelerate_lightbox {\
-			display: block;\
-			position:fixed;\
-			top:0;\
-			width:100%;\
-			height:100%;\
-			z-index:999999991;\
-			overflow:hidden;\
-			box-sizing: border-box;\
-			background-color: rgba(0,0,0,.8);\
-			padding: 1em;\
-		}\
-		#fa_accelerate_lightbox .lightbox_btn {\
-			position: absolute;\
-			top: 50%;\
-			width: 50%;\
-			height: 100px;\
-			margin-top: -50px;\
-			outline: 0;\
-		}\
-		#fa_accelerate_lightbox .lightbox_prev {\
-			left: 0;\
-		}\
-		#fa_accelerate_lightbox .lightbox_next {\
-			right: 0;\
-		}\
-		#fa_accelerate_lightbox img {\
-			display:block;\
-			margin:0 auto;\
-			max-width:100%;\
-			max-height:100%;\
-			height:auto;\
-			width:auto;\
-		}\
-		</style>")
+		$("body").append("<style>" + css_lightbox + "</style>")
 
 		var images = {}
 		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image")
@@ -338,7 +379,7 @@ var keymappings = {
 }
 
 $('html').on("keydown", function(e) {
-	if ($(e.target).is("input"))
+	if ($(e.target).is("input") || $(e.target).is("textarea"))
 		return true
 
 	if (keymappings[keymap][e.which] && !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
@@ -348,21 +389,5 @@ $('html').on("keydown", function(e) {
 });
 
 $(function() {
-	$("body").append("<style>\
-	body {\
-		margin-top: 50px;\
-	}\
-	#header {\
-		min-height: inherit;\
-		width: 100%;\
-		position: fixed;\
-		top: 0;\
-		background-color: #151517;\
-		z-index: 9000;\
-		box-shadow: 0 0 10px rgba(0,0,0,0.5);\
-	}\
-	.section-divider {\
-		box-shadow: none !important;\
-	}\
-	</style>");
+	$("body").append("<style>" + css_body + "</style>");
 })
