@@ -43,9 +43,7 @@ var css_lightbox = `
     outline: 0;
 }
 #fa_accelerate_lightbox .lightbox_close::before {
-    content:"✖";
-    display: block;
-    color: #fff;
+    content: "✖";
 }
 #fa_accelerate_lightbox .lightbox_btn {
     position: absolute;
@@ -60,14 +58,21 @@ var css_lightbox = `
     opacity: 0.5;
     color: #fff;
     text-shadow: 0 0 8px rgba(0,0,0,0.3);
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
 }
-
 #fa_accelerate_lightbox .lightbox_btn::before {
     position: absolute;
     top: 50%;
     font-size: 100px;
     transform: translateY(-50%);
+}
+#fa_accelerate_lightbox .lightbox_btn.disabled {
+    cursor: default;
+}
+#fa_accelerate_lightbox .lightbox_btn.disabled::before,
+#fa_accelerate_lightbox .lightbox_btn.disabled:hover::before,
+#fa_accelerate_lightbox .lightbox_btn.disabled:focus::before {
+    opacity: 0.2;
 }
 #fa_accelerate_lightbox .lightbox_close:hover::before,
 #fa_accelerate_lightbox .lightbox_close:focus::before,
@@ -216,7 +221,7 @@ var Slideshow = (function() {
 		lightbox = $("<lightbox id='fa_accelerate_lightbox'>\
 			<a href='#' class='lightbox_prev lightbox_btn'></a>\
 			<a href='#' class='lightbox_next lightbox_btn'></a>\
-			<a href='#' class='lightbox_close'>✖</a>\
+			<a href='#' class='lightbox_close'></a>\
 		</lightbox>")
 		lightbox.appendTo($("body"))
 		lightboximg.appendTo(lightbox)
@@ -254,11 +259,11 @@ var Slideshow = (function() {
 			}
 		}
 		instance.show = function() {
-			lightbox.show();
+			lightbox.fadeIn(150);
 			return instance.go(pos);
 		}
 		instance.hide = function() {
-			lightbox.hide();
+			lightbox.fadeOut(150);
 			keymap = "basic";
 			return false;
 		}
@@ -297,6 +302,7 @@ var Slideshow = (function() {
 			return false;
 		})
 
+		lightbox.fadeOut(0);
 		// do not remove this:
 		return instance;
 	};
