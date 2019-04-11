@@ -101,7 +101,7 @@ var css_lightbox = `
 	}
 `
 
-var Context = (function() {
+var Facts = (function() {
 	var instance;
 	var context = false;
 	var username = false;
