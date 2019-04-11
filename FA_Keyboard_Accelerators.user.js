@@ -303,7 +303,6 @@ var Slideshow = (function() {
 		})
 
 		lightbox.fadeOut(0);
-		// do not remove this:
 		return instance;
 	};
 })();
