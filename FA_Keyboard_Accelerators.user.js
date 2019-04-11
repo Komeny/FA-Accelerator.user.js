@@ -316,7 +316,7 @@ var keymappings = {
 		},
 		39: function() { // [->]
 			//                                                                            detail view     gallery
-			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next, .button a.next, button.button:contains('Next') ")
+			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next, .button a.next, button.button:contains('Next')")
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		70: function() { // F
