@@ -5,10 +5,10 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     16
+// @version     17
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
-// @grant       GM_xmlhttpRequest
-// @grant       GM_openInTab
+// @grant       GM.xmlhttpRequest
+// @grant       GM.openInTab
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
 // ==/UserScript==
 
@@ -270,7 +270,7 @@ var Slideshow = (function() {
 		instance.open = function() {
 			var l = window.location
 			var url = l.protocol+"//"+l.hostname+"/view/"+pages[pos]+"/"
-			return GM_openInTab(url, true);
+			return GM.openInTab(url, true);
 		}
 		instance.show_next = function() {
 			if(pages.length > pos) {
