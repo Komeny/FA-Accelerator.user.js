@@ -299,17 +299,31 @@ var Slideshow = (function() {
 		instance.has_next = function() { return pos < (pages.length-1) }
 
 		// click handlers
-		$("#fa_accelerate_lightbox .lightbox_next").click(function() {
+		var $lightbox_next  = $("#fa_accelerate_lightbox .lightbox_next");
+		var $lightbox_prev  = $("#fa_accelerate_lightbox .lightbox_prev");
+		var $lightbox_close = $("#fa_accelerate_lightbox .lightbox_close");
+
+		$lightbox_next.click(function() {
 			if(instance.show_next() == false) {
 				instance.hide();
 			}
-			return false;
-		})
-		$("#fa_accelerate_lightbox .lightbox_prev").click(instance.show_previous)
-		$("#fa_accelerate_lightbox .lightbox_close").click(function() {
-			instance.hide();
-			return false;
-		})
+		});
+		$lightbox_prev.click(instance.show_previous);
+		$lightbox_close.click(instance.hide);
+		lightboximg.on("load", function() {
+			if(instance.has_next()) {
+				$lightbox_next.removeClass('disabled');
+			}
+			else {
+				$lightbox_next.addClass('disabled');
+			}
+			if(instance.has_previous()) {
+				$lightbox_prev.removeClass('disabled');
+			}
+			else {
+				$lightbox_prev.addClass('disabled');
+			}
+		});
 
 		lightbox.fadeOut(0);
 		return instance;
