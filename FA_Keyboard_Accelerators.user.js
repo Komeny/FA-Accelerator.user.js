@@ -19,85 +19,85 @@ var css_body = `
 
 var css_lightbox = `
 	#fa_accelerate_lightbox {
-	    display: flex;
-	    align-items: center;
-	    position:fixed;
-	    top:0;
-	    right: 0;
-	    bottom: 0;
-	    left: 0;
-	    z-index: 999999991;
-	    overflow: hidden;
-	    box-sizing: border-box;
-	    background-color: rgba(0,0,0,.8);
-	    padding: 1em;
+		display: flex;
+		align-items: center;
+		position:fixed;
+		top:0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 999999991;
+		overflow: hidden;
+		box-sizing: border-box;
+		background-color: rgba(0,0,0,.8);
+		padding: 1em;
 	}
 	#fa_accelerate_lightbox .lightbox_close {
-	    position: absolute;
-	    right: 0;
-	    top: 0;
-	    font-size: 40px;
-	    padding: 50px;
-	    line-height: 1;
-	    z-index: 1;
-	    outline: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		font-size: 40px;
+		padding: 50px;
+		line-height: 1;
+		z-index: 1;
+		outline: 0;
 	}
 	#fa_accelerate_lightbox .lightbox_close::before {
-	    content: "✖";
+		content: "✖";
 	}
 	#fa_accelerate_lightbox .lightbox_btn {
-	    position: absolute;
-	    top: 0;
-	    bottom: 0;
-	    width: 30%;
-	    outline: 0;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 30%;
+		outline: 0;
 	}
 	#fa_accelerate_lightbox .lightbox_close::before,
 	#fa_accelerate_lightbox .lightbox_btn::before {
-	    display: block;
-	    opacity: 0.5;
-	    color: #fff;
-	    text-shadow: 0 0 8px rgba(0,0,0,0.3);
-	    transition: opacity 0.15s ease-in-out;
+		display: block;
+		opacity: 0.5;
+		color: #fff;
+		text-shadow: 0 0 8px rgba(0,0,0,0.3);
+		transition: opacity 0.15s ease-in-out;
 	}
 	#fa_accelerate_lightbox .lightbox_btn::before {
-	    position: absolute;
-	    top: 50%;
-	    font-size: 100px;
-	    transform: translateY(-50%);
+		position: absolute;
+		top: 50%;
+		font-size: 100px;
+		transform: translateY(-50%);
 	}
 	#fa_accelerate_lightbox .lightbox_btn.disabled {
-	    cursor: default;
+		cursor: default;
 	}
 	#fa_accelerate_lightbox .lightbox_btn.disabled::before,
 	#fa_accelerate_lightbox .lightbox_btn.disabled:hover::before,
 	#fa_accelerate_lightbox .lightbox_btn.disabled:focus::before {
-	    opacity: 0.2;
+		opacity: 0.2;
 	}
 	#fa_accelerate_lightbox .lightbox_close:hover::before,
 	#fa_accelerate_lightbox .lightbox_close:focus::before,
 	#fa_accelerate_lightbox .lightbox_btn:hover::before,
 	#fa_accelerate_lightbox .lightbox_btn:focus::before {
-	    opacity: 1;
+		opacity: 1;
 	}
 	#fa_accelerate_lightbox .lightbox_prev {
-	    left: 0;
+		left: 0;
 	}
 	#fa_accelerate_lightbox .lightbox_next {
-	    right: 0;
+		right: 0;
 	}
 	#fa_accelerate_lightbox .lightbox_prev::before {
-	    content:'‹';
-	    left: 50px;
+		content:'‹';
+		left: 50px;
 	}
 	#fa_accelerate_lightbox .lightbox_next::before {
-	    content:'›';
-	    right: 50px;
+		content:'›';
+		right: 50px;
 	}
 	#fa_accelerate_lightbox img {
-	    margin:0 auto;
-	    max-width:100%;
-	    max-height:100%;
+		margin:0 auto;
+		max-width:100%;
+		max-height:100%;
 	}
 `
 
