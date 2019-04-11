@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     17
+// @version     18
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM.openInTab
@@ -98,6 +98,20 @@ var css_lightbox = `
 		margin:0 auto;
 		max-width:100%;
 		max-height:100%;
+	}
+	.progress-bar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 5px;
+		background-color: rgba(255, 255, 255, 0.2);
+		z-index: -2;
+	}
+	.progress-bar .progress {
+		background-color: rgba(255, 255, 255, 0.4);
+		width: 0%;
+		height: 100%;
 	}
 `
 
@@ -218,14 +232,22 @@ var Slideshow = (function() {
 
 		// initialisations
 		var lightboximg = $("<img></img>")
-		lightbox = $("<lightbox id='fa_accelerate_lightbox'>\
-			<a href='#' class='lightbox_prev lightbox_btn'></a>\
-			<a href='#' class='lightbox_next lightbox_btn'></a>\
-			<a href='#' class='lightbox_close'></a>\
-		</lightbox>")
+		lightbox = $(`
+			<lightbox id='fa_accelerate_lightbox'>
+				<a href='#' class='lightbox_prev lightbox_btn'></a>
+				<a href='#' class='lightbox_next lightbox_btn'></a>
+				<a href='#' class='lightbox_close'></a>
+				<div class="progress-bar"><div class="progress"></div></div>
+			</lightbox>
+		`);
 		lightbox.appendTo($("body"))
 		lightboximg.appendTo(lightbox)
 		$("body").append("<style>" + css_lightbox + "</style>")
+
+		var $lightbox_next  = $("#fa_accelerate_lightbox .lightbox_next");
+		var $lightbox_prev  = $("#fa_accelerate_lightbox .lightbox_prev");
+		var $lightbox_close = $("#fa_accelerate_lightbox .lightbox_close");
+		var $progressbar = $("#fa_accelerate_lightbox .progress-bar .progress");
 
 		var images = {}
 		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image")
@@ -253,6 +275,7 @@ var Slideshow = (function() {
 				Cache().requestImage(pages[pos1], function(path) {
 					lightboximg.attr("src", path);
 				})
+				$progressbar.width(`${((pos1+1)/(pages.length))*100}%`)
 			}
 			else {
 				return false;
@@ -290,18 +313,15 @@ var Slideshow = (function() {
 			}
 		}
 		instance.show_first = function() {
-			return instance.go(pos = 0);
+			instance.go(pos = 0);
+			return false;
 		}
 		instance.show_last = function() {
-			return instance.go(pos = ((pages.length>0) ? pages.length-1 : 0));
+			instance.go(pos = ((pages.length>0) ? pages.length-1 : 0));
+			return false;
 		}
 		instance.has_previous = function() { return pos > 0 }
 		instance.has_next = function() { return pos < (pages.length-1) }
-
-		// click handlers
-		var $lightbox_next  = $("#fa_accelerate_lightbox .lightbox_next");
-		var $lightbox_prev  = $("#fa_accelerate_lightbox .lightbox_prev");
-		var $lightbox_close = $("#fa_accelerate_lightbox .lightbox_close");
 
 		$lightbox_next.click(function() {
 			if(instance.show_next() == false) {
