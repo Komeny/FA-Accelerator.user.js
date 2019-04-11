@@ -108,14 +108,14 @@ var Context = (function() {
 
 	// Detect context
 	// Types: user-profile, user-gallery, submission, browse, search
-	var pathcrumb = window.location.pathname.match(/^\/([^\/]+)/)
+	var pathcrumb = window.location.pathname.match(/^\/([^\/]+)/);
 	var crumbs = {
 		search:	 "search",
 		browse:	 "browse",
 		view:	 "submission",
 		gallery: "user-gallery",
 		user:	 "user-profile",
-	}
+	};
 	console.log(pathcrumb)
 	if (crumbs[pathcrumb]) {
 		context = crumbs[pathcrumb];
@@ -123,12 +123,12 @@ var Context = (function() {
 
 	// Detect user name
 	if ($(".submission-title > span > a > strong").length > 0) {
-		username = $(".submission-title > span > a > strong").text()
-		console.log(username)
-	};
+		username = $(".submission-title > span > a > strong").text();
+		console.log(username);
+	}
 
 	return function(argument) {
-		if (instance) { return instance; }
+		if (instance) { return instance }
 		instance = this;
 	}
 })()
@@ -141,7 +141,7 @@ var Cache = (function() {
 	var imglinkcache = {};
 
 	return function() {
-		if (instance) { return instance; }
+		if (instance) { return instance }
 		instance = this;
 
 		// public members
@@ -190,10 +190,10 @@ var Prefetcher = (function() { // TODO: Rewrite this.
 
 		// public members
 		instance.request = function(path, callback) {
-			prefetchlist.push({"path": path, "callback": callback})
+			prefetchlist.push({"path": path, "callback": callback});
 
 			if(!handle){
-				handle = window.setTimeout(prefetch, interval)
+				handle = window.setTimeout(prefetch, interval);
 			}
 		}
 		// do not remove this:
@@ -210,7 +210,7 @@ var Slideshow = (function() {
 	var lightbox;
 
 	return function() {
-		if (instance) { return instance; }
+		if (instance) { return instance }
 		instance = this;
 
 		// private members
@@ -351,8 +351,8 @@ var keymappings = {
 		87: function() { // W
 			var e = $("a:contains('+Watch')")
 			if(e.length > 0) {
-				e[0].click()
-				return false
+				e[0].click();
+				return false;
 			}
 		}
 	},
