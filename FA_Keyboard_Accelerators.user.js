@@ -248,9 +248,9 @@ var Slideshow = (function() {
 		// }
 
 		// public members
-		instance.go = function(pos) {
-			if (pages.length > pos && pos >= 0) {
-				Cache().requestImage(pages[pos], function(path) {
+		instance.go = function(pos1) {
+			if (pages.length > pos1 && pos1 >= 0) {
+				Cache().requestImage(pages[pos1], function(path) {
 					lightboximg.attr("src", path);
 				})
 			}
