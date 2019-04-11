@@ -289,6 +289,14 @@ var Slideshow = (function() {
 				return false;
 			}
 		}
+		instance.show_first = function() {
+			return instance.go(pos = 0);
+		}
+		instance.show_last = function() {
+			return instance.go(pos = ((pages.length>0) ? pages.length-1 : 0));
+		}
+		instance.has_previous = function() { return pos > 0 }
+		instance.has_next = function() { return pos < (pages.length-1) }
 
 		// click handlers
 		$("#fa_accelerate_lightbox .lightbox_next").click(function() {
@@ -357,10 +365,12 @@ var keymappings = {
 		}
 	},
 	"lightbox": {
-		27: function() { return Slideshow().hide() }, // [ESC]
-		83: function() { return Slideshow().hide() }, // S
-		79: function() { return Slideshow().open() }, // O
-		13: function() { return Slideshow().open() }, // [Return]
+		27: function() { return Slideshow().hide() },          // [ESC]
+		83: function() { return Slideshow().hide() },          // S
+		79: function() { return Slideshow().open() },          // O
+		13: function() { return Slideshow().open() },          // [Return]
+		35: function() { return Slideshow().show_last() },     // [End]
+		36: function() { return Slideshow().show_first() },    // [Home]
 		37: function() { return Slideshow().show_previous() }, // [<-]
 		39: function() { return Slideshow().show_next() },     // [->]
 			
