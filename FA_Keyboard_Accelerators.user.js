@@ -357,21 +357,13 @@ var keymappings = {
 		}
 	},
 	"lightbox": {
-		27: function() { // [ESC]
-			return Slideshow().hide();
-		},
-		83: function() { // S
-			return Slideshow().hide();
-		},
-		37: function() { // [<-]
-			Slideshow().show_previous(); return false;
-		},
-		39: function() { // [->]
-			if(Slideshow().show_next() == false) {
-				Slideshow().hide();
-			}
-			return false;
-		},
+		27: function() { return Slideshow().hide() }, // [ESC]
+		83: function() { return Slideshow().hide() }, // S
+		79: function() { return Slideshow().open() }, // O
+		13: function() { return Slideshow().open() }, // [Return]
+		37: function() { return Slideshow().show_previous() }, // [<-]
+		39: function() { return Slideshow().show_next() },     // [->]
+			
 		// 70: function() { // F
 		// 	var foundsomething = false;
 		// 	$("html a").each(function(i, self){
@@ -382,9 +374,6 @@ var keymappings = {
 		// 	})
 		// 	return !foundsomething
 		// },
-		79: function() { // O
-			Slideshow().open(); return false;
-		},
 		0: function() {} // dummy
 	}
 }
