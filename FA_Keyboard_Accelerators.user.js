@@ -151,7 +151,7 @@ var Cache = (function() {
 				return callback(imglinkcache[id]);
 			}
 			// Get submission page
-			var dom = $("<f></f>").load("/view/"+id+"/"+" #submissionImg", function() {
+			var dom = $("<f></f>").load(`/view/${id}/ #submissionImg`, function() {
 				instance.save(id, dom)
 				return callback(imglinkcache[id]);
 			});
@@ -231,7 +231,7 @@ var Slideshow = (function() {
 		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image")
 			.map(function(i,e) {
 				var id = e.id.replace(/sid-(.*)/, "$1");
-				Prefetcher().request("/view/"+id+"/ #submissionImg",
+				Prefetcher().request(`/view/${id}/ #submissionImg`,
 					function(dom){Cache().save(id, dom) });
 				return id;
 			});
@@ -269,8 +269,9 @@ var Slideshow = (function() {
 		}
 		instance.open = function() {
 			var l = window.location
-			var url = l.protocol+"//"+l.hostname+"/view/"+pages[pos]+"/"
-			return GM.openInTab(url, true);
+			var url = `${l.protocol}//${l.hostname}/view/${pages[pos]}/`
+			GM.openInTab(url, true);
+			return false;
 		}
 		instance.show_next = function() {
 			if(pages.length > pos) {
