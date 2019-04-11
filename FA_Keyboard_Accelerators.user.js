@@ -373,14 +373,13 @@ var keymappings = {
 			return !foundsomething
 		},
 		71: function() { // G
-			var foundsomething = false;
-			$("html a").each(function(i, self){
-				if(self.pathname.match("^/gallery")) {
-					self.click()
-					foundsomething = true
+			$(".submission-artist-container a").each(function(i, self) {
+				var r = self.pathname.match("^/user/(.+)")
+				if(r && r[1]) {
+					window.location.href = `/gallery/${r[1]}`;
+					return false;
 				}
 			})
-			return !foundsomething
 		},
 		27: function() { // [ESC]
 			return Slideshow().hide();
