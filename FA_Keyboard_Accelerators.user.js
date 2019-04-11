@@ -274,7 +274,7 @@ var Slideshow = (function() {
 			return false;
 		}
 		instance.show_next = function() {
-			if(pages.length > pos) {
+			if(pages.length > pos+1) {
 				return instance.go(++pos);
 			}
 			else {
