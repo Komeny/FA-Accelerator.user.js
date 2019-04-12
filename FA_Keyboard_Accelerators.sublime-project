@@ -4,5 +4,18 @@
 		{
 			"path": "."
 		}
+	],
+	"settings":
+	{
+		"tab_size": 4
+	},
+	"build_systems":
+	[
+		{
+			"name": "npm run serve (host script locally)",
+			"working_dir": "${project_path}/dev/",
+			"shell": true,
+			"cmd": ["npm", "run", "serve"]
+		}
 	]
 }

@@ -1,2 +1,4 @@
+/dev/node_modules
+/dev/package-lock.json
 jquery.min.js
 *.sublime-workspace
