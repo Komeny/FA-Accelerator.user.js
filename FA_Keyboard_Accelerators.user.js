@@ -155,9 +155,6 @@ var Facts = (function() {
 
 var Cache = (function() {
 	var instance;
-	// define private "members" here
-	// define them as simple closure variables
-	// use "instance" instead of "this"
 	var imglinkcache = {};
 
 	return function() {
@@ -236,6 +233,15 @@ var Slideshow = (function() {
 		// private members
 		var pos = 0;
 
+		// Preload images
+		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image")
+			.map(function(i,e) {
+				var id = e.id.replace(/sid-(.*)/, "$1");
+				Prefetcher().request(`/view/${id}/ #submissionImg`,
+					function(dom){Cache().save(id, dom) });
+				return id;
+			});
+
 		// initialisations
 		var lightboximg = $("<img></img>")
 		lightbox = $(`
@@ -256,14 +262,6 @@ var Slideshow = (function() {
 		var $progressbar = $("#fa_accelerate_lightbox .progress-bar .progress");
 
 		var images = {}
-		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image")
-			.map(function(i,e) {
-				var id = e.id.replace(/sid-(.*)/, "$1");
-				Prefetcher().request(`/view/${id}/ #submissionImg`,
-					function(dom){Cache().save(id, dom) });
-				return id;
-			});
-
 		// // load & preload images
 		// var preload = function(pos) {
 		// 	if(pos < pages.length) {
