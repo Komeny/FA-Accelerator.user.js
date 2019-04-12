@@ -114,9 +114,10 @@ var css_lightbox = `
 		z-index: -2;
 	}
 	.progress-bar .progress {
-		background-color: rgba(255, 255, 255, 0.4);
+		background-color: rgba(255, 255, 255, 0.6);
 		width: 0%;
 		height: 100%;
+		transition: width 0.5s ease-out;
 	}
 `
 
