@@ -32,6 +32,11 @@ var css_lightbox = `
 		background-color: rgba(0,0,0,.8);
 		padding: 1em;
 	}
+
+	#fa_accelerate_lightbox img {
+		box-shadow: 0 0 100px rgba(0,0,0,1);
+	}
+
 	#fa_accelerate_lightbox .lightbox_close {
 		position: absolute;
 		right: 0;
