@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     18
+// @version     19
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM.openInTab
