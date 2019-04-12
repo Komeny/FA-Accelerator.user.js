@@ -168,6 +168,17 @@ var Cache = (function() {
 				return callback(imglinkcache[id]);
 			}
 			// Get submission page
+			var dom = $("<img/>").attr('src', id, function() {
+				instance.save(id, dom)
+				return callback(imglinkcache[id]);
+			});
+		}
+		instance.requestImage_bak = function(id, callback) {
+			if(imglinkcache[id]) {
+				//console.log("Serving "+id+" from cache")
+				return callback(imglinkcache[id]);
+			}
+			// Get submission page
 			var dom = $("<f></f>").load(`/view/${id}/ #submissionImg`, function() {
 				instance.save(id, dom)
 				return callback(imglinkcache[id]);
@@ -188,16 +199,17 @@ var Prefetcher = (function() { // TODO: Rewrite this.
 	// define them as simple closure variables
 	// use "instance" instead of "this"
 	var handle = false;
-	var interval = 500;
+	var interval = 10;
 	var prefetchlist = new Array();
 
 	var prefetch = function() {
 		if(prefetchlist.length > 0) {
 			var e = prefetchlist.shift();
-			var dom = $("<f></f>").load(e.path, function() {
+			var img = $('<img/>').on('load', function() {
 				handle = window.setTimeout(prefetch, interval);
-				e.callback(dom);
+				e.callback(e.path);
 			});
+			img.attr('src', e.path);
 		}
 	}
 
@@ -233,13 +245,19 @@ var Slideshow = (function() {
 		// private members
 		var pos = 0;
 
-		// Preload images
-		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image")
+		// Prefetch images
+		var pages = $(".browse,.gallery,.messagecenter").find("figure.t-image img")
 			.map(function(i,e) {
-				var id = e.id.replace(/sid-(.*)/, "$1");
-				Prefetcher().request(`/view/${id}/ #submissionImg`,
-					function(dom){Cache().save(id, dom) });
-				return id;
+				// src="//t.facdn.net/31164681@300-1555105530.jpg"
+				var r = e.src.match(/^(https?):(\/\/t\.facdn\.net)\/(\d+)@\d+-(\d+.*)/);
+				var id = `${r[1]}:${r[2]}/${r[3]}@1280-${r[4]}`
+				
+				Prefetcher().request(id, () => true );
+				return {
+					url: id,
+					sub_id: r[3],
+					sub_url: `${r[1]}://www.furaffinity.net/view/${r[3]}/`
+				};
 			});
 
 		// initialisations
@@ -276,9 +294,7 @@ var Slideshow = (function() {
 		// public members
 		instance.go = function(pos1) {
 			if (pages.length > pos1 && pos1 >= 0) {
-				Cache().requestImage(pages[pos1], function(path) {
-					lightboximg.attr("src", path);
-				})
+				lightboximg.attr("src", pages[pos1].url);
 				$progressbar.width(`${((pos1+1)/(pages.length))*100}%`)
 			}
 			else {
@@ -286,8 +302,10 @@ var Slideshow = (function() {
 			}
 		}
 		instance.show = function() {
-			lightbox.fadeIn(150);
-			return instance.go(pos);
+			if (pages.length > 0) {
+				lightbox.fadeIn(150);
+				return instance.go(pos);
+			}
 		}
 		instance.hide = function() {
 			lightbox.fadeOut(150);
@@ -295,9 +313,7 @@ var Slideshow = (function() {
 			return false;
 		}
 		instance.open = function() {
-			var l = window.location
-			var url = `${l.protocol}//${l.hostname}/view/${pages[pos]}/`
-			GM.openInTab(url, true);
+			GM.openInTab(pages[pos].sub_url, true);
 			return false;
 		}
 		instance.show_next = function() {
