@@ -117,7 +117,7 @@ var css_lightbox = `
 		background-color: rgba(255, 255, 255, 0.6);
 		width: 0%;
 		height: 100%;
-		transition: width 0.5s ease-out;
+		transition: width 0.3s ease-out;
 	}
 `
 
