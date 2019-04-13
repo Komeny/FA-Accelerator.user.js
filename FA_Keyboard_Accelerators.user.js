@@ -375,6 +375,7 @@ var Slideshow = (function() {
 		var $lightbox_close = $("#fa_accelerate_lightbox .lightbox_close");
 		var $lightbox_check = $("#fa_accelerate_lightbox .lightbox_check");
 		var $lightbox_trash = $("#fa_accelerate_lightbox .lightbox_trash");
+		var $lightbox_open  = $("#fa_accelerate_lightbox .lightbox_open");
 		var $progressbar = $("#fa_accelerate_lightbox .progress-bar");
 
 		var images = {}
@@ -499,6 +500,7 @@ var Slideshow = (function() {
 			}
 		});
 		$lightbox_prev.click(instance.show_previous);
+		$lightbox_open.click(instance.open);
 		$lightbox_close.click(instance.hide);
 		$lightbox_trash.click(instance.remove_marked);
 		$lightboximg.on("load", function() {
