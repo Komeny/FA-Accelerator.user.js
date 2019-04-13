@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     26
+// @version     27
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM.openInTab
@@ -49,7 +49,7 @@ var css_lightbox = `
 		min-height: 1px;
 		justify-content: center;
 		align-items: center;
-		padding: 10px;
+		padding: 0 10px 10px;
 	}
 	.fa_accelerate_lightbox .image-container img {
 		max-width: 100%;
