@@ -503,6 +503,7 @@ var Slideshow = (function() {
 		$lightbox_open.click(instance.open);
 		$lightbox_close.click(instance.hide);
 		$lightbox_trash.click(instance.remove_marked);
+		$lightbox_check.click(instance.mark_toggle);
 		$lightboximg.on("load", function() {
 			if(instance.has_next()) {
 				$lightbox_next.removeClass('disabled');
