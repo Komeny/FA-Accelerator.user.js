@@ -27,6 +27,7 @@ var css_lightbox = `
 		display: flex;
 		flex-direction: column;
 		background-color: rgba(0, 0, 0, 0.9);
+		z-index: 1000001;
 	}
 	.fa_accelerate_lightbox .progress-bar {
 		width: 30%;
