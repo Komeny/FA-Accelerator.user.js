@@ -30,8 +30,8 @@ var css_lightbox = `
 	}
 	.fa_accelerate_lightbox .progress-bar {
 		width: 30%;
-		height: 5px;
-		background-color: rgba(255, 255, 255, 0.5);
+		height: 4px;
+		background-color: rgba(0, 255, 217, 0.7);
 		transition: width 0.3s ease-out;
 	}
 	.fa_accelerate_lightbox .action-bar {
