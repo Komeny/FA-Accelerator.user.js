@@ -437,7 +437,7 @@ var Slideshow = (function() {
 			return false;
 		}
 		instance.mark_toggle = function() {
-			pages[pos].sub_box.prop('checked', !pages[pos].sub_box.prop('checked'));
+			pages[pos].sub_box.click(); // there's a click handler on element
 			instance.go(pos); // redraw
 			return false;
 		}
