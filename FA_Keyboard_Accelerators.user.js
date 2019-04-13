@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     30
+// @version     31
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM_xmlhttpRequest
@@ -31,7 +31,7 @@ const css_lightbox = `
 	.fa_accelerate_lightbox .progress-bar {
 		width: 30%;
 		height: 4px;
-		background-color: rgba(0, 255, 217, 0.7);
+		background-color: #26b76a;
 		transition: width 0.3s ease-out;
 	}
 	.fa_accelerate_lightbox .action-bar {
@@ -93,6 +93,9 @@ const css_lightbox = `
 	}
 	.fa_accelerate_lightbox .lightbox_btn.active {
 		opacity: 1;
+	}
+	.fa_accelerate_lightbox .lightbox_btn.active .icon {
+		fill: #26b76a;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.disabled {
 		cursor: default !important;
