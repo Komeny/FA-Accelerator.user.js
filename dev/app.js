@@ -15,7 +15,10 @@ function loadscript() {
 
 // Watch for file changes
 fs.watchFile(flpath, (curr, prev) => {
-	console.log(`${fln} changed, reloading`);
+	var d = new Date();
+	var D = `${d.getFullYear()}-${('0'+(d.getMonth()+1)).slice(-2)}-${d.getDate()}`
+	var T = `${('0'+d.getHours()).slice(-2)}:${('0'+d.getMinutes()).slice(-2)}`
+	console.log(`${D} ${T} ${fln} changed, reloading`);
 	loadscript();
 });
 
