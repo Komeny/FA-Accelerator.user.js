@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     24
+// @version     25
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM.openInTab
@@ -40,7 +40,7 @@ var css_lightbox = `
 		justify-content: space-between;
 	}
 	.fa_accelerate_lightbox .action-bar .lightbox_btn {
-		padding: 20px;
+		padding: 10px;
 	}
 	.fa_accelerate_lightbox .image-container {
 		position: relative;
@@ -101,7 +101,7 @@ var css_lightbox = `
 	}
 	.fa_accelerate_lightbox .icon {
 		display: inline-block;
-		width: 80px;
+		width: 50px;
 		height: 34px;
 		fill: #fff;
 	}
@@ -109,6 +109,10 @@ var css_lightbox = `
 		position: relative;
 		height: 40px;
 		top: -3px;
+	}
+
+	.fa_accelerate_lightbox .icon.icon-gallery {
+		width: 88px;
 	}
 
 	.fa_accelerate_lightbox .icon.icon-prev,
@@ -430,6 +434,7 @@ var Slideshow = (function() {
 		}
 		instance.mark = function() {
 			pages[pos].sub_box.prop('checked', true);
+			
 			return false;
 		}
 		instance.remove_marked = function() {
