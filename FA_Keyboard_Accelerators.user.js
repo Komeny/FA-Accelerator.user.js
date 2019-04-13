@@ -200,7 +200,7 @@ const html_lightbox = `
 		<a class="lightbox_btn lightbox_check" href="#" title="Select image [Return]">
 			<svg class="icon icon-check"><use xlink:href="#icon-check"></use></svg>
 		</a>
-		<a class="lightbox_btn lightbox_trash disabled" href="#" title="Remove selected [Del]">
+		<a class="lightbox_btn lightbox_trash" href="#" title="Remove selected [Del]">
 			<svg class="icon icon-trash"><use xlink:href="#icon-trash"></use></svg>
 		</a>
 		<a class="lightbox_btn lightbox_close" href="#" title="Close [Esc]">
