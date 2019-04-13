@@ -262,7 +262,7 @@ var Slideshow = (function() {
 					sub_url: `${protocol}//www.furaffinity.net/view/${r[2]}/`,
 					sub_box: $(`#input-${r[2]}`)
 				};
-			});
+			}).toArray();
 
 		// initialisations
 		lightbox = $(`
@@ -445,14 +445,13 @@ var Slideshow = (function() {
 			return false;
 		}
 		instance.mark_all = function() {
-			$(".browse,.gallery,.messagecenter").
-				find("figure input").prop('checked', true)
+			$("button.check-uncheck").click();
 			instance.go(pos); // redraw
 			return false;
 		}
 		instance.mark_none = function() {
 			$(".browse,.gallery,.messagecenter").
-				find("figure input").prop('checked', false)
+				find("figure input[checked]").click()
 			instance.go(pos); // redraw
 			return false;
 		}
@@ -462,11 +461,12 @@ var Slideshow = (function() {
 			var pages1 = pages;
 			f.append('messagecenter-action', 'remove_checked')
 			var p = Array.
-				filter(pages1, (e) => e.sub_box.prop('checked')).
-				each(function(e, k) {
-					f.append('submissions[]', e.sub_id);
-					$(e.sub_ele).remove();
-					pages1 = pages1.slice(k);
+				forEach(pages1, function(e, k) {
+					if(e.sub_box.prop('checked')) {
+						f.append('submissions[]', e.sub_id);
+						$(e.sub_ele).remove();
+						pages1.splice(k, 1);
+					}
 				});
 			
 			// Send POST to FA to remove marked
