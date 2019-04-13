@@ -460,14 +460,13 @@ var Slideshow = (function() {
 			var f = new FormData();
 			var pages1 = pages;
 			f.append('messagecenter-action', 'remove_checked')
-			var p = Array.
-				forEach(pages1, function(e, k) {
-					if(e.sub_box.prop('checked')) {
-						f.append('submissions[]', e.sub_id);
-						$(e.sub_ele).remove();
-						pages1.splice(k, 1);
-					}
-				});
+			var p = pages1.forEach(function(e, k) {
+				if(e.sub_box.prop('checked')) {
+					f.append('submissions[]', e.sub_id);
+					$(e.sub_ele).remove();
+					pages1.splice(k, 1);
+				}
+			});
 			
 			// Send POST to FA to remove marked
 			GM_xmlhttpRequest({
