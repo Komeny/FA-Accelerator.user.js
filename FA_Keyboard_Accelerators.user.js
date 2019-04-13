@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     23
+// @version     24
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM.openInTab
@@ -58,7 +58,7 @@ var css_lightbox = `
 		z-index: -3;
 	}
 	.fa_accelerate_lightbox .lightbox_btn {
-		opacity: 0.4;
+		opacity: 0.5;
 		color: #fff;
 		line-height: 1;
 		transition: opacity 0.15s ease-in-out;
@@ -73,7 +73,7 @@ var css_lightbox = `
 		top: 0;
 		bottom: 0;
 		width: 30%;
-		filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+		filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav span {
 		position: absolute;
@@ -103,9 +103,7 @@ var css_lightbox = `
 		display: inline-block;
 		width: 80px;
 		height: 34px;
-		stroke-width: 0;
-		stroke: currentColor;
-		fill: currentColor;
+		fill: #fff;
 	}
 	.fa_accelerate_lightbox .icon.icon-artist {
 		position: relative;
