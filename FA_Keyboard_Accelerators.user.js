@@ -117,7 +117,7 @@ var css_lightbox = `
 
 	.fa_accelerate_lightbox .icon.icon-prev,
 	.fa_accelerate_lightbox .icon.icon-next {
-		width: 42px;
+		width: 32px;
 		height: auto;
 	}
 `
