@@ -318,25 +318,25 @@ var Slideshow = (function() {
 			</svg>
 			<div class="progress-bar"></div>
 			<div class="action-bar">
-				<a class="lightbox_btn lightbox_zoom" href="#" title="Zoom">
+				<a class="lightbox_btn lightbox_zoom disabled" href="#" title="Zoom [Z]">
 					<svg class="icon icon-zoom"><use xlink:href="#icon-zoom"></use></svg>
 				</a>
-				<a class="lightbox_btn lightbox_open" href="#" title="Open in new Tab">
+				<a class="lightbox_btn lightbox_open" href="#" title="Open in new Tab [O]">
 					<svg class="icon icon-tab"><use xlink:href="#icon-tab"></use></svg>
 				</a>
-				<a class="lightbox_btn lightbox_artist" href="#" title="Artist">
+				<a class="lightbox_btn lightbox_artist disabled" href="#" title="Artist [A]">
 					<svg class="icon icon-artist"><use xlink:href="#icon-artist"></use></svg>
 				</a>
-				<a class="lightbox_btn lightbox_gallery" href="#" title="Gallery">
+				<a class="lightbox_btn lightbox_gallery disabled" href="#" title="Gallery [G]">
 					<svg class="icon icon-gallery"><use xlink:href="#icon-gallery"></use></svg>
 				</a>
-				<a class="lightbox_btn lightbox_check" href="#" title="Select image">
+				<a class="lightbox_btn lightbox_check" href="#" title="Select image [Return]">
 					<svg class="icon icon-check"><use xlink:href="#icon-check"></use></svg>
 				</a>
-				<a class="lightbox_btn lightbox_trash" href="#" title="Remove selected">
+				<a class="lightbox_btn lightbox_trash disabled" href="#" title="Remove selected [Del]">
 					<svg class="icon icon-trash"><use xlink:href="#icon-trash"></use></svg>
 				</a>
-				<a class="lightbox_btn lightbox_close" href="#" title="Close">
+				<a class="lightbox_btn lightbox_close" href="#" title="Close [Esc]">
 					<svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg>
 				</a>
 			</div>
