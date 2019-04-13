@@ -455,8 +455,7 @@ var Slideshow = (function() {
 			return false;
 		}
 		instance.mark_none = function() {
-			$(".browse,.gallery,.messagecenter").
-				find("figure input[checked]").click()
+			$(".browse,.gallery,.messagecenter").find("figure input:checked").click();
 			instance.go(pos); // redraw
 			return false;
 		}
