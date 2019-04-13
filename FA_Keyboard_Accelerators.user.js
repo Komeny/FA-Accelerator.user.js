@@ -367,6 +367,7 @@ var Slideshow = (function() {
 		var $lightbox_prev  = $("#fa_accelerate_lightbox .lightbox_prev");
 		var $lightbox_close = $("#fa_accelerate_lightbox .lightbox_close");
 		var $lightbox_check = $("#fa_accelerate_lightbox .lightbox_check");
+		var $lightbox_trash = $("#fa_accelerate_lightbox .lightbox_trash");
 		var $progressbar = $("#fa_accelerate_lightbox .progress-bar");
 
 		var images = {}
@@ -432,6 +433,24 @@ var Slideshow = (function() {
 		}
 		instance.mark = function() {
 			pages[pos].sub_box.prop('checked', true);
+			instance.go(pos); // redraw
+			return false;
+		}
+		instance.mark_toggle = function() {
+			pages[pos].sub_box.prop('checked', !pages[pos].sub_box.prop('checked'));
+			instance.go(pos); // redraw
+			return false;
+		}
+		instance.mark_all = function() {
+			$(".browse,.gallery,.messagecenter").
+				find("figure input").prop('checked', true)
+			instance.go(pos); // redraw
+			return false;
+		}
+		instance.mark_none = function() {
+			$(".browse,.gallery,.messagecenter").
+				find("figure input").prop('checked', false)
+			instance.go(pos); // redraw
 			return false;
 		}
 		instance.remove_marked = function() {
@@ -461,6 +480,7 @@ var Slideshow = (function() {
 		});
 		$lightbox_prev.click(instance.show_previous);
 		$lightbox_close.click(instance.hide);
+		$lightbox_trash.click(instance.remove_marked);
 		$lightboximg.on("load", function() {
 			if(instance.has_next()) {
 				$lightbox_next.removeClass('disabled');
@@ -489,7 +509,8 @@ var Slideshow = (function() {
 
 var keymappings = {
 	"basic" : {
-		46: function() { return Slideshow().remove_marked() }, // [Del]
+		45: function() { return Slideshow().mark_all() },      // [Insert]
+		46: function() { return $("button.remove-checked").click() || false }, // [Del]
 		37: function() { // [<-]
 			//                                                                            detail view     gallery
 			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev, button.button:contains('Prev')")
@@ -545,6 +566,8 @@ var keymappings = {
 		37: function() { return Slideshow().show_previous() }, // [<-]
 		39: function() { return Slideshow().show_next() },     // [->]
 		46: function() { return Slideshow().remove_marked() }, // [Del]
+		32: function() { return Slideshow().mark_toggle() },   // [Blank]
+		45: function() { return Slideshow().mark_all() },      // [Insert]
 		190:function() { return Slideshow().mark() },          // [.]
 			
 		// 70: function() { // F
