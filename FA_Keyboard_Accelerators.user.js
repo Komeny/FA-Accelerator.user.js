@@ -106,7 +106,14 @@ var css_lightbox = `
 		stroke: currentColor;
 		fill: currentColor;
 	}
-	.fa_accelerate_lightbox .icon.icon-prev, .fa_accelerate_lightbox .icon.icon-next {
+	.fa_accelerate_lightbox .icon.icon-artist {
+		position: relative;
+		height: 40px;
+		top: -3px;
+	}
+
+	.fa_accelerate_lightbox .icon.icon-prev,
+	.fa_accelerate_lightbox .icon.icon-next {
 		width: 42px;
 		height: auto;
 	}
