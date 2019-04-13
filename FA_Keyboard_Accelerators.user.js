@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     23
+// @version     25
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM.openInTab
@@ -40,7 +40,7 @@ var css_lightbox = `
 		justify-content: space-between;
 	}
 	.fa_accelerate_lightbox .action-bar .lightbox_btn {
-		padding: 20px;
+		padding: 10px;
 	}
 	.fa_accelerate_lightbox .image-container {
 		position: relative;
@@ -58,7 +58,7 @@ var css_lightbox = `
 		z-index: -3;
 	}
 	.fa_accelerate_lightbox .lightbox_btn {
-		opacity: 0.4;
+		opacity: 0.5;
 		color: #fff;
 		line-height: 1;
 		transition: opacity 0.15s ease-in-out;
@@ -73,7 +73,7 @@ var css_lightbox = `
 		top: 0;
 		bottom: 0;
 		width: 30%;
-		filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+		filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav span {
 		position: absolute;
@@ -84,13 +84,13 @@ var css_lightbox = `
 		left: 0;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav.lightbox_prev span {
-		left: 20px;
+		left: 50px;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav.lightbox_next {
 		right: 0;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav.lightbox_next span {
-		right: 20px;
+		right: 50px;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.active {
 		opacity: 1;
@@ -101,11 +101,9 @@ var css_lightbox = `
 	}
 	.fa_accelerate_lightbox .icon {
 		display: inline-block;
-		width: 80px;
+		width: 50px;
 		height: 34px;
-		stroke-width: 0;
-		stroke: currentColor;
-		fill: currentColor;
+		fill: #fff;
 	}
 	.fa_accelerate_lightbox .icon.icon-artist {
 		position: relative;
@@ -113,9 +111,13 @@ var css_lightbox = `
 		top: -3px;
 	}
 
+	.fa_accelerate_lightbox .icon.icon-gallery {
+		width: 88px;
+	}
+
 	.fa_accelerate_lightbox .icon.icon-prev,
 	.fa_accelerate_lightbox .icon.icon-next {
-		width: 42px;
+		width: 32px;
 		height: auto;
 	}
 `
