@@ -255,6 +255,7 @@ var Slideshow = (function() {
 				Prefetcher().request(id, () => true );
 				return {
 					url: id,
+					sub_ele: e,
 					sub_id: r[2],
 					sub_url: `${protocol}//www.furaffinity.net/view/${r[2]}/`,
 					sub_box: $(`#input-${r[2]}`)
@@ -455,23 +456,37 @@ var Slideshow = (function() {
 		}
 		instance.remove_marked = function() {
 			// Collect marked
-			var f = new FormData()
+			var f = new FormData();
+			var pages1 = pages;
 			f.append('messagecenter-action', 'remove_checked')
 			var p = Array.
-				filter(pages, (e) => e.sub_box.prop('checked')).
-				each((e) => f.append('submissions[]', e.sub_id));
+				filter(pages1, (e) => e.sub_box.prop('checked')).
+				each(function(e, k) {
+					f.append('submissions[]', e.sub_id);
+					$(e.sub_ele).remove();
+					pages1 = pages1.slice(k);
+				});
 			
 			// Send POST to FA to remove marked
 			GM_xmlhttpRequest({
 				url: `http://www.furaffinity.net/msg/submissions/`,
 				method: 'POST',
 				data: f,
-			})
+			});
+			pages = pages1;
+			instance.mark_none();
+			instance.go(0);    // Cause "redraw" of Lightbox
 			return false;
 		}
 		instance.has_previous = () => pos > 0
 		instance.has_next = () => pos < (pages.length-1)
 		instance.is_marked = () => !!pages[pos].sub_box.prop('checked')
+		if((window.location+'').match(/\/msg\/submissions\//)) {
+			instance.can_mark = () => true;
+		}
+		else {
+			instance.can_mark = () => false;
+		}
 
 		$lightbox_next.click(function() {
 			if(instance.show_next() == false) {
@@ -560,12 +575,13 @@ var keymappings = {
 		27: function() { return Slideshow().hide() },          // [ESC]
 		83: function() { return Slideshow().hide() },          // S
 		79: function() { return Slideshow().open() },          // O
-		13: function() { return Slideshow().open() },          // [Return]
+		38: function() { return Slideshow().open() },          // [^]
 		35: function() { return Slideshow().show_last() },     // [End]
 		36: function() { return Slideshow().show_first() },    // [Home]
 		37: function() { return Slideshow().show_previous() }, // [<-]
 		39: function() { return Slideshow().show_next() },     // [->]
 		46: function() { return Slideshow().remove_marked() }, // [Del]
+		13: function() { return Slideshow().mark_toggle() },   // [Enter]
 		32: function() { return Slideshow().mark_toggle() },   // [Blank]
 		45: function() { return Slideshow().mark_all() },      // [Insert]
 		190:function() { return Slideshow().mark() },          // [.]
