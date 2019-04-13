@@ -84,13 +84,13 @@ var css_lightbox = `
 		left: 0;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav.lightbox_prev span {
-		left: 20px;
+		left: 50px;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav.lightbox_next {
 		right: 0;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.lightbox_nav.lightbox_next span {
-		right: 20px;
+		right: 50px;
 	}
 	.fa_accelerate_lightbox .lightbox_btn.active {
 		opacity: 1;
