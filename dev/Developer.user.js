@@ -14,6 +14,8 @@
 // ==/UserScript==
 
 const uri = 'http://localhost:3003/FA_Keyboard_Accelerators.user.js?ts='+(+new Date());
+window.DEBUG = true;
+
 GM_xmlhttpRequest({
 	method: 'GET',
 	url: uri,

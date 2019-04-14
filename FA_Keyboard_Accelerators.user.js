@@ -223,7 +223,7 @@ const html_lightbox = `
 	`
 
 var keymap = "basic"
-
+var log = (window.DEBUG)?function(){return console.log.apply(this,arguments)}:()=>{};
 
 var Facts = (function() {
 	var instance;
