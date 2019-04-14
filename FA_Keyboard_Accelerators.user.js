@@ -484,10 +484,9 @@ var Slideshow = (function() {
 					pages1.splice(k, 1);
 				}
 			}
-			
 			// Send POST to FA to remove marked
 			GM_xmlhttpRequest({
-				url: `${protocol}://www.furaffinity.net/msg/submissions/`,
+				url: `${protocol}//www.furaffinity.net/msg/submissions/`,
 				method: 'POST',
 				data: f,
 			});
