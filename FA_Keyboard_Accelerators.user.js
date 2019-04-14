@@ -5,7 +5,7 @@
 // @include     https://furaffinity.net/*
 // @include     http://www.furaffinity.net/*
 // @include     http://furaffinity.net/*
-// @version     34
+// @version     35
 // @downloadURL https://raw.githubusercontent.com/Komeny/FA-Accelerator.user.js/master/FA_Keyboard_Accelerators.user.js
 // @grant       GM.xmlhttpRequest
 // @grant       GM_xmlhttpRequest
@@ -621,7 +621,8 @@ var keymappings = {
 }
 
 $('html').on("keydown", function(e) {
-	if ($(e.target).is("input") || $(e.target).is("textarea"))
+	$tgt = $(e.target);
+	if ($tgt.is("input[type!='checkbox']") || $tgt.is("textarea"))
 		return true
 
 	if (keymappings[keymap][e.which] && !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey) {
