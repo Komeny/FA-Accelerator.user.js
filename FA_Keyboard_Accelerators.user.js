@@ -397,7 +397,8 @@ var Slideshow = (function() {
 		instance.go = function(pos1) {
 			if (pages.length > pos1 && pos1 >= 0) {
 				$lightboximg.attr("src", pages[pos1].url);
-				$progressbar.width(`${((pos1+1)/(pages.length))*100}%`)
+				$progressbar.width(`${((pos1+1)/(pages.length))*100}%`);
+				pos = pos1;
 			}
 			else {
 				return false;
@@ -428,7 +429,7 @@ var Slideshow = (function() {
 		}
 		instance.show_next = function() {
 			if(pages.length > pos+1) {
-				return instance.go(++pos);
+				return instance.go(pos+1);
 			}
 			else {
 				return false;
@@ -436,18 +437,18 @@ var Slideshow = (function() {
 		}
 		instance.show_previous = function() {
 			if(pos > 0){
-				return instance.go(--pos);
+				return instance.go(pos-1);
 			}
 			else {
 				return false;
 			}
 		}
 		instance.show_first = function() {
-			instance.go(pos = 0);
+			instance.go(0);
 			return false;
 		}
 		instance.show_last = function() {
-			instance.go(pos = ((pages.length>0) ? pages.length-1 : 0));
+			instance.go((pages.length>0) ? pages.length-1 : 0);
 			return false;
 		}
 		instance.mark = function() {
@@ -640,7 +641,7 @@ $(function() {
 		window.setTimeout(function() {
 			Slideshow().show();
 			let n = Slideshow().find(r[2]);
-			if(n) {
+			if(n !== false) {
 				Slideshow().go(n);
 			}
 		}, 0);
