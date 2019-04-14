@@ -240,7 +240,7 @@ var Facts = (function() {
 		gallery: "user-gallery",
 		user:	 "user-profile",
 	};
-	console.log(pathcrumb)
+	log(pathcrumb)
 	if (crumbs[pathcrumb]) {
 		context = crumbs[pathcrumb];
 	}
@@ -248,7 +248,7 @@ var Facts = (function() {
 	// Detect user name
 	if ($(".submission-title > span > a > strong").length > 0) {
 		username = $(".submission-title > span > a > strong").text();
-		console.log(username);
+		log(username);
 	}
 
 	return function(argument) {
