@@ -403,6 +403,14 @@ var Slideshow = (function() {
 				return false;
 			}
 		}
+		instance.find = function(id) {
+			for(let i=0; i<pages.length; i++) {
+				let e = pages[i];
+				if(e.sub_id == id)
+					return i;
+			}
+			return false;
+		}
 		instance.show = function() {
 			if (pages.length > 0) {
 				lightbox.fadeIn(150);
@@ -479,7 +487,7 @@ var Slideshow = (function() {
 			
 			// Send POST to FA to remove marked
 			GM_xmlhttpRequest({
-				url: `http://www.furaffinity.net/msg/submissions/`,
+				url: `${protocol}://www.furaffinity.net/msg/submissions/`,
 				method: 'POST',
 				data: f,
 			});
@@ -624,4 +632,19 @@ $('html').on("keydown", function(e) {
 
 $(function() {
 	$("body").append("<style>" + css_body + "</style>");
+
+	$(".browse,.gallery,.messagecenter").find("figure.t-image img").contextmenu(function(e) {
+		var src = $(e.target).attr("src");
+		var r = src.match(/^(\/\/t\.facdn\.net)\/(\d+)@\d+-(\d+.*)/);
+
+		keymap = "lightbox";
+		window.setTimeout(function() {
+			Slideshow().show();
+			let n = Slideshow().find(r[2]);
+			if(n) {
+				Slideshow().go(n);
+			}
+		}, 0);
+		return false;
+	});
 })
