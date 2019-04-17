@@ -436,16 +436,10 @@ var Slideshow = (function() {
 			}
 		}
 		instance.show_previous = function() {
-			if(pos > 0){
-				return instance.go(pos-1);
-			}
-			else {
-				return false;
-			}
+			return (pos > 0) ? instance.go(pos-1) : false
 		}
 		instance.show_first = function() {
-			instance.go(0);
-			return false;
+			return instance.go(0) || false;
 		}
 		instance.show_last = function() {
 			instance.go((pages.length>0) ? pages.length-1 : 0);
@@ -544,8 +538,8 @@ var Slideshow = (function() {
 
 var keymappings = {
 	"basic" : {
-		45: function() { return Slideshow().mark_all() },      // [Insert]
-		46: function() { return $("button.remove-checked").click() || false }, // [Del]
+		45: () => { Slideshow().mark_all() },                      // [Insert]
+		46: () => { $("button.remove-checked").click() || false }, // [Del]
 		37: function() { // [<-]
 			//                                                                            detail view     gallery
 			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev, button.button:contains('Prev')")
@@ -592,30 +586,22 @@ var keymappings = {
 		}
 	},
 	"lightbox": {
-		27: function() { return Slideshow().hide() },          // [ESC]
-		83: function() { return Slideshow().hide() },          // S
-		79: function() { return Slideshow().open() },          // O
-		38: function() { return Slideshow().open() },          // [^]
-		35: function() { return Slideshow().show_last() },     // [End]
-		36: function() { return Slideshow().show_first() },    // [Home]
-		37: function() { return Slideshow().show_previous() }, // [<-]
-		39: function() { return Slideshow().show_next() },     // [->]
-		46: function() { return Slideshow().remove_marked() }, // [Del]
-		13: function() { return Slideshow().mark_toggle() },   // [Enter]
-		32: function() { return Slideshow().mark_toggle() },   // [Blank]
-		45: function() { return Slideshow().mark_all() },      // [Insert]
-		190:function() { return Slideshow().mark() },          // [.]
+		27:  () => { Slideshow().hide() },           // [ESC]
+		83:  () => { Slideshow().hide() },           // S
+		79:  () => { Slideshow().open() },           // O
+		38:  () => { Slideshow().open() },           // [^]
+		35:  () => { Slideshow().show_last() },      // [End]
+		36:  () => { Slideshow().show_first() },     // [Home]
+		37:  () => { Slideshow().show_previous() },  // [<-]
+		39:  () => { Slideshow().show_next() },      // [->]
+		46:  () => { Slideshow().remove_marked() },  // [Del]
+		13:  () => { Slideshow().mark_toggle() },    // [Enter]
+		32:  () => { Slideshow().mark_toggle() },    // [Blank]
+		45:  () => { Slideshow().mark_all() },       // [Insert]
+		190: () => { Slideshow().mark() },           // [.]
+		65:  () => { Slideshow().open_author() },    // [A]
+		71:  () => { Slideshow().open_gallery() },   // [G]
 			
-		// 70: function() { // F
-		// 	var foundsomething = false;
-		// 	$("html a").each(function(i, self){
-		// 		if(self.text == "+Add to Favorites") {
-		// 			self.click()
-		// 			foundsomething = true
-		// 		}
-		// 	})
-		// 	return !foundsomething
-		// },
 		0: function() {} // dummy
 	}
 }
