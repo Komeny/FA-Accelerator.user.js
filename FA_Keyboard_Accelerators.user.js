@@ -531,7 +531,6 @@ var Slideshow = (function() {
 				$lightbox_check.addClass('active');
 			else
 				$lightbox_check.removeClass('active');
-
 		});
 
 		lightbox.fadeOut(0);
@@ -545,13 +544,29 @@ var keymappings = {
 		45: () => Slideshow().mark_all(),                        // [Insert]
 		46: () => ($("button.remove-checked").click() || false), // [Del]
 		37: function() { // [<-]
-			//                                                                            detail view     gallery
-			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev, button.button:contains('Prev')")
+			var e = $(
+				// Generic
+				"button[value=Back], a.button-link:contains('Back'), a.button.prev"+
+				// Detail view
+				", .button a.prev"+
+				// Gallery
+				", button.button:contains('Prev')"+
+				// Submissions list
+				", a.section-button.a.prev"
+			)
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		39: function() { // [->]
-			//                                                                            detail view     gallery
-			var e = $("button[value=Next], a.button-link:contains('Next'), a.button.next, .button a.next, button.button:contains('Next')")
+			var e = $(
+				// Generic
+				"button[value=Next], a.button-link:contains('Next'), a.button.next"+
+				// Detail view
+				", .button a.next"+
+				// Gallery
+				", button.button:contains('Next')"+
+				// Submissions list
+				", a.section-button.a.more, a.section-button.a:contains('Next')"
+			)
 			if(e.length > 0) { e[0].click(); return false }
 		},
 		70: function() { // F
