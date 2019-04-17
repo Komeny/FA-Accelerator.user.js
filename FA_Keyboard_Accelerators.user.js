@@ -541,8 +541,8 @@ var Slideshow = (function() {
 
 var keymappings = {
 	"basic" : {
-		45: () => { Slideshow().mark_all() },                      // [Insert]
-		46: () => { $("button.remove-checked").click() || false }, // [Del]
+		45: () => Slideshow().mark_all(),                          // [Insert]
+		46: () => ($("button.remove-checked").click() || false),   // [Del]
 		37: function() { // [<-]
 			//                                                                            detail view     gallery
 			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev, button.button:contains('Prev')")
@@ -589,21 +589,21 @@ var keymappings = {
 		}
 	},
 	"lightbox": {
-		27:  () => { Slideshow().hide() },           // [ESC]
-		83:  () => { Slideshow().hide() },           // S
-		79:  () => { Slideshow().open() },           // O
-		38:  () => { Slideshow().open() },           // [^]
-		35:  () => { Slideshow().show_last() },      // [End]
-		36:  () => { Slideshow().show_first() },     // [Home]
-		37:  () => { Slideshow().show_previous() },  // [<-]
-		39:  () => { Slideshow().show_next() },      // [->]
-		46:  () => { Slideshow().remove_marked() },  // [Del]
-		13:  () => { Slideshow().mark_toggle() },    // [Enter]
-		32:  () => { Slideshow().mark_toggle() },    // [Blank]
-		45:  () => { Slideshow().mark_all() },       // [Insert]
-		190: () => { Slideshow().mark() },           // [.]
-		65:  () => { Slideshow().open_author() },    // [A]
-		71:  () => { Slideshow().open_gallery() },   // [G]
+		27:  () => Slideshow().hide(),           // [ESC]
+		83:  () => Slideshow().hide(),           // S
+		79:  () => Slideshow().open(),           // O
+		38:  () => Slideshow().open(),           // [^]
+		35:  () => Slideshow().show_last(),      // [End]
+		36:  () => Slideshow().show_first(),     // [Home]
+		37:  () => Slideshow().show_previous(),  // [<-]
+		39:  () => Slideshow().show_next(),      // [->]
+		46:  () => Slideshow().remove_marked(),  // [Del]
+		13:  () => Slideshow().mark_toggle(),    // [Enter]
+		32:  () => Slideshow().mark_toggle(),    // [Blank]
+		45:  () => Slideshow().mark_all(),       // [Insert]
+		190: () => Slideshow().mark(),           // [.]
+		65:  () => Slideshow().open_author(),    // [A]
+		71:  () => Slideshow().open_gallery(),   // [G]
 			
 		0: function() {} // dummy
 	}
