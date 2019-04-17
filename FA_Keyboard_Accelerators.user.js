@@ -487,7 +487,10 @@ var Slideshow = (function() {
 			});
 			pages = pages1;
 			instance.mark_none();
-			instance.go(0);    // Cause "redraw" of Lightbox
+			if(pages.length == 0)
+				instance.hide();
+			else
+				instance.go(0); // Cause "redraw" of Lightbox
 			return false;
 		}
 		instance.has_previous = () => pos > 0
