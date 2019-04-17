@@ -541,8 +541,9 @@ var Slideshow = (function() {
 
 var keymappings = {
 	"basic" : {
-		45: () => Slideshow().mark_all(),                          // [Insert]
-		46: () => ($("button.remove-checked").click() || false),   // [Del]
+		27: () => Slideshow().hide(),                            // [ESC] (fallback)
+		45: () => Slideshow().mark_all(),                        // [Insert]
+		46: () => ($("button.remove-checked").click() || false), // [Del]
 		37: function() { // [<-]
 			//                                                                            detail view     gallery
 			var e = $("button[value=Back], a.button-link:contains('Back'), a.button.prev, .button a.prev, button.button:contains('Prev')")
@@ -571,9 +572,6 @@ var keymappings = {
 					return false;
 				}
 			})
-		},
-		27: function() { // [ESC]
-			return Slideshow().hide();
 		},
 		83: function() { // S
 			keymap = "lightbox";
